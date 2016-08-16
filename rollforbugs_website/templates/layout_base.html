@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {% if title %}
+    <title>{{ title }} - Roll for Bugs</title>
+    {% else %}
+    <title>Roll for Bugs</title>
+    {% endif %}
+
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <!-- Bootstrap material design -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/bootstrap-material-design.min.css"
+          integrity="sha384-N0BLkotGV8+MQ//rm6VFf6tr2k+wjuCtBpf2tzDc3uPw04kQxD3cuu8LFMrbaarS" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.min.css"
+          integrity="sha384-4CNO3tet8oyNrTDL+Tfoj6Tq3w/nSW7vjXqMHhBnh4IMCYqtuZN8HCTZeCJlSkta" crossorigin="anonymous" />
+</head>
+<body>
+    <div id="header">
+        {% block header %}
+        <div class="navbar navbar-default container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                    &#9776;
+                </button>
+                <a class="navbar-brand" href="/">Roll for Bugs</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li class="dropdown">
+                        <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Projects
+                            <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/projects/shitty-keyboard">Shitty Keyboard</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div id="footer">
+        {% block footer %}
+        &copy; Copyright 2016 Roll for Bugs.
+        {% endblock %}
+    </div>
+
+    <!-- jQuery and Bootstrap -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"
+            integrity="sha384-rY/jv8mMhqDabXSo+UCggqKtdmBfd3qC2/KvyTDNQ6PcUJXaxK1tMepoQda4g5vB" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap material design -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"
+            integrity="sha384-yRy1htyOMfCzmQNTpniuZqZB8w2FN1HHr5MhjKl0zVhYuIOnvkFzm53AweFptZRc" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"
+            integrity="sha384-PIYVOoqHx1t0JkMbUpPkVWE57sGIbDt9CDEp7OZ666w9VDs62saoMrwjI/oQcPBW" crossorigin="anonymous"></script>
+
+    <!-- Now we get to do some of our own shit -->
+    <script type="text/javascript">
+        // Load material design scripts
+        $.material.init()
+
+        // Mark the active element in the navbar
+        $(document).ready(function () {
+            var url = window.location;
+            $('ul.nav a').filter(function () { return this.href == url }).parent().addClass('active');
+        });
+    </script>
+</body>
+</html>
