@@ -9,18 +9,17 @@ app.jinja_env.globals.update(get_fortune=fortune.get_fortune)
 
 
 @app.route('/')
-@app.route('/index')
-def render_index():
+def index_page():
     return render_template('index.html')
 
 
 @app.route('/blog')
-def render_blog():
+def blog_page():
     return render_template('blog.html')
 
 
 @app.route('/about')
-def render_about():
+def about_page():
     return render_template('about.html')
 
 
