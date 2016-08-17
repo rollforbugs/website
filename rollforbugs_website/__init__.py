@@ -17,12 +17,14 @@ def index_page():
 
 @app.route('/blog')
 def blog_page():
-    return render_template('blog.html')
+    title = 'Blog'
+    return render_template('blog.html', title=title)
 
 
 @app.route('/about')
 def about_page():
-    return render_template('about.html')
+    title = 'About'
+    return render_template('about.html', title=title)
 
 
 @app.route('/fortune')
