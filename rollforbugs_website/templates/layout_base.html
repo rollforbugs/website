@@ -23,21 +23,25 @@
           integrity="sha384-N0BLkotGV8+MQ//rm6VFf6tr2k+wjuCtBpf2tzDc3uPw04kQxD3cuu8LFMrbaarS" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.min.css"
           integrity="sha384-4CNO3tet8oyNrTDL+Tfoj6Tq3w/nSW7vjXqMHhBnh4IMCYqtuZN8HCTZeCJlSkta" crossorigin="anonymous" />
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout_base.css') }}" />
 </head>
 <body>
     <div id="header">
         {% block header %}
-        <div class="navbar navbar-default container-fluid">
+        <nav class="navbar navbar-default">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
                     &#9776;
                 </button>
-                <a class="navbar-brand" href="/">Roll for Bugs</a>
+                <a class="navbar-brand" href="{{ url_for('index_page') }}">Roll for Bugs</a>
             </div>
             <div class="navbar-collapse collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="{{ url_for('index_page') }}">Home</a></li>
+                    <li><a href="{{ url_for('blog_page') }}">Blog</a></li>
                     <li class="dropdown">
                         <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Projects
                             <b class="caret"></b></a>
@@ -45,22 +49,23 @@
                             <li><a href="/projects/shitty-keyboard">Shitty Keyboard</a></li>
                         </ul>
                     </li>
-                    <li><a href="/about">About</a></li>
+                    <li><a href="{{ url_for('about_page') }}">About</a></li>
                 </ul>
-                <div class="navbar-text navbar-right">{{ get_fortune() }}</div>
+                <div id="fortune" class="navbar-text navbar-right">{{ get_fortune() }}</div>
             </div>
         </div>
+        </nav>
         {% endblock %}
     </div>
-    <div id="content">
+    <div id="content" class="container-fluid">
         {% block content %}
         {% endblock %}
     </div>
-    <div id="footer">
+    <footer id="footer" class="footer container-fluid">
         {% block footer %}
-        &copy; Copyright 2016 Roll for Bugs.
+        <p class="text-muted">&copy; Copyright 2016 Roll for Bugs.</p>
         {% endblock %}
-    </div>
+    </footer>
 
     <!-- jQuery and Bootstrap -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"
@@ -83,6 +88,17 @@
         $(document).ready(function () {
             var url = window.location;
             $('ul.nav a').filter(function () { return this.href == url }).parent().addClass('active');
+        });
+
+        // Load a new fortune when the fortune gets clicked
+        $('#fortune').click(function () {
+            $.ajax({
+                'url': '{{ url_for('fortune_api') }}',
+                'type': 'GET',
+                'success': function(data) {
+                    $('#fortune').text(data);
+                }
+            });
         });
     </script>
 </body>

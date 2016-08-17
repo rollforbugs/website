@@ -6,5 +6,6 @@ fortunes = [
     "chmod a-x \"$(which chmod)\""
 ]
 
+
 def get_fortune():
-    return random.choice(fortunes);
+    return random.choice(fortunes)

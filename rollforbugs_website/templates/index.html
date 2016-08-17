@@ -1,4 +1,10 @@
 {% extends "layout_base.html" %}
 {% block content %}
-<h1>Welcome to the Roll for Bugs website!</h1>
+    <div class="bs-component">
+        <div class="jumbotron">
+            <h1>Roll for Bugs</h1>
+            <p>Welcome to the Roll for Bugs website!  We've still got a lot to piece together, but we swear there will eventually be stuff here.</p>
+            <p><a class="btn btn-primary btn-lg" href="{{ url_for('about_page') }}">About Us</a></p>
+        </div>
+    </div>
 {% endblock %}
