@@ -1,15 +1,15 @@
 from flask import Flask
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
-from rollforbugs_website import fortune
-from rollforbugs_website import render_markdown
+from rollforbugs_website.fortune import get_fortune
+from rollforbugs_website.render_markdown import render_markdown
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
 # Add custom symbols to Jinja
-app.jinja_env.globals.update(get_fortune=fortune.get_fortune)
-app.jinja_env.globals.update(markdown=render_markdown.render_markdown)
+app.jinja_env.globals.update(get_fortune=get_fortune)
+app.jinja_env.globals.update(markdown=render_markdown)
 
 
 @app.route('/')
