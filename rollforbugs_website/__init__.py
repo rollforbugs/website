@@ -1,9 +1,11 @@
 from flask import Flask
 from flask import render_template
+from flask_sqlalchemy import SQLAlchemy
 from rollforbugs_website import fortune
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
+db = SQLAlchemy(app)
 # Add custom symbols to Jinja
 app.jinja_env.globals.update(get_fortune=fortune.get_fortune)
 
