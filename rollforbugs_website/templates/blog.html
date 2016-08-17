@@ -1,4 +1,20 @@
-{% extends "layout_base.html" %}
+{% extends 'layout_base.html' %}
 {% block content %}
-<p>Maybe someday there will be a blog here!</p>
+    <div class="page-header">
+        <h1>Roll for Bugs Blog <small>Just some shit we feel like sharing</small></h1>
+    </div>
+    {% for post in posts %}
+    <div class="post">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>
+                    {{ markdown(post.title)|safe }}
+                    <small>{{ post.author.name }}</small>
+                </h3>
+            </div>
+            <div class="panel-body">{{ markdown(post.body)|safe }}</div>
+            <div class="panel-footer"><p>{{ post.created }}</p></div>
+        </div>
+    </div>
+    {% endfor %}
 {% endblock %}
