@@ -47,7 +47,7 @@
                     </li>
                     <li><a href="/about">About</a></li>
                 </ul>
-                <div class="navbar-text navbar-right">{{ get_fortune() }}</div>
+                <div id="fortune" class="navbar-text navbar-right">{{ get_fortune() }}</div>
             </div>
         </div>
         {% endblock %}
@@ -83,6 +83,17 @@
         $(document).ready(function () {
             var url = window.location;
             $('ul.nav a').filter(function () { return this.href == url }).parent().addClass('active');
+        });
+
+        // Load a new fortune when the fortune gets clicked
+        $('#fortune').click(function () {
+            $.ajax({
+                'url': '{{ url_for('fortune_api') }}',
+                'type': 'GET',
+                'success': function(data) {
+                    $('#fortune').text(data);
+                }
+            });
         });
     </script>
 </body>

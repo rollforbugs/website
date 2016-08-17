@@ -5,7 +5,7 @@ from rollforbugs_website import fortune
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 # Add custom symbols to Jinja
-app.jinja_env.globals.update(get_fortune=fortune.get_fortune);
+app.jinja_env.globals.update(get_fortune=fortune.get_fortune)
 
 
 @app.route('/')
@@ -22,6 +22,11 @@ def render_blog():
 @app.route('/about')
 def render_about():
     return render_template('about.html')
+
+
+@app.route('/fortune')
+def fortune_api():
+    return fortune.get_fortune()
 
 
 if __name__ == '__main__':
