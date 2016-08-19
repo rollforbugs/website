@@ -3,7 +3,7 @@ import random
 from flask import Flask
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
-from rollforbugs_website.render_markdown import render_markdown
+from rollforbugs_website.utils import render_markdown
 
 
 app = Flask(__name__)
