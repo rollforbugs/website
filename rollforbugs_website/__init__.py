@@ -14,6 +14,18 @@ app.jinja_env.globals.update(markdown=render_markdown)
 
 fortunes = []
 
+# Load fortunes from file
+fortune_file_name = app.config.get('FORTUNE_FILE', None)
+if fortune_file_name and os.path.exists(fortune_file_name):
+    f = open(fortune_file_name, 'r')
+    for line in f:
+        # Ignore empty lines
+        line = line.strip()
+        if not (line == ''):
+            fortunes.append(line)
+if len(fortunes) == 0:
+    fortunes.append('No fortunes?!  How unfortunate...')
+
 
 @app.route('/')
 def index_page():
@@ -52,17 +64,4 @@ def fortune_api():
 
 
 if __name__ == '__main__':
-    # Load fortunes from file
-    fortune_file_name = app.config.get('FORTUNE_FILE', None)
-    if fortune_file_name and os.path.exists(fortune_file_name):
-        f = open(fortune_file_name, 'r')
-        for line in f:
-            # Ignore empty lines
-            line = line.strip()
-            if not (line == ''):
-                fortunes.append(line)
-    else:
-        fortunes.append('No fortunes?!  How unfortunate...')
-
-    # Start serving
     app.run()
