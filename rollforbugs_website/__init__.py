@@ -1,15 +1,18 @@
+import os
+import random
 from flask import Flask
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
-from rollforbugs_website.fortune import get_fortune
 from rollforbugs_website.render_markdown import render_markdown
+
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
 # Add custom symbols to Jinja
-app.jinja_env.globals.update(get_fortune=get_fortune)
 app.jinja_env.globals.update(markdown=render_markdown)
+
+fortunes = []
 
 
 @app.route('/')
@@ -45,8 +48,21 @@ def about_page():
 
 @app.route('/fortune')
 def fortune_api():
-    return fortune.get_fortune()
+    return random.choice(fortunes)
 
 
 if __name__ == '__main__':
+    # Load fortunes from file
+    fortune_file_name = app.config.get('FORTUNE_FILE', None)
+    if fortune_file_name and os.path.exists(fortune_file_name):
+        f = open(fortune_file_name, 'r')
+        for line in f:
+            # Ignore empty lines
+            line = line.strip()
+            if not (line == ''):
+                fortunes.append(line)
+    else:
+        fortunes.append('No fortunes?!  How unfortunate...')
+
+    # Start serving
     app.run()

@@ -51,7 +51,7 @@
                     </li>
                     <li><a href="{{ url_for('about_page') }}">About</a></li>
                 </ul>
-                <div id="fortune" class="navbar-text navbar-right">{{ get_fortune() }}</div>
+                <div id="fortune" class="navbar-text navbar-right">Loading fortune...</div>
             </div>
         </div>
         </nav>
@@ -91,7 +91,7 @@
         });
 
         // Load a new fortune when the fortune gets clicked
-        $('#fortune').click(function () {
+        function getFortune() {
             $.ajax({
                 'url': '{{ url_for('fortune_api') }}',
                 'type': 'GET',
@@ -99,7 +99,8 @@
                     $('#fortune').text(data);
                 }
             });
-        });
+        }
+        $('#fortune').ready(getFortune).click(getFortune);
     </script>
 </body>
 </html>
