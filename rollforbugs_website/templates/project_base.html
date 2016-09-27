@@ -1,1 +1,9 @@
-{% extends 'index.html' %}
+{% extends 'layout_base.html' %}
+{% block content %}
+    <div class="bs-component">
+        <div class="jumbotron">
+            {% block jumbotron %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
