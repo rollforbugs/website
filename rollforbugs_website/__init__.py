@@ -63,5 +63,11 @@ def fortune_api():
     return random.choice(fortunes)
 
 
+@app.route('/projects/shitty-keyboard')
+def projects_shitty_keyboard_page():
+    title = 'Shitty Keyboard'
+    return render_template('projects/shitty_keyboard.html', title=title)
+
+
 if __name__ == '__main__':
     app.run()
